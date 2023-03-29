@@ -1,0 +1,31 @@
+body {
+  background-color: #1c0f13;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.logo {
+  width: 60%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.coming-soon {
+  text-align: center;
+  color: #f7f7f7;
+}
+
+h1 {
+  font-weight: 400;
+}
