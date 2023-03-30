@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now()) @map("created_at")
+  email      String   @unique
+  first_name String?
+  last_name  String?
+  avatar     String?
+  forms      Form[]
+
+  @@map("users")
+}
+
+enum NotificationPreference {
+  ALL
+  DAILY
+  WEEKLY
+}
+
+model Form {
+  id                     String                  @id @default(cuid())
+  name                   String
+  emailForwardAddress    String?                 @map("email_forward_address")
+  botDetection           Boolean                 @map("bot_detection")
+  notificationPreference NotificationPreference? @map("notification_preference")
+  endpoint               String
+  createdAt              DateTime                @default(now()) @map("created_at")
+  updatedAt              DateTime                @updatedAt @map("updated_at")
+  User                   User?                   @relation(fields: [userId], references: [id])
+  userId                 String?                 @map("user_id")
+  Submission             Submission[]
+
+  @@map("forms")
+}
+
+model Submission {
+  id        String   @id @default(uuid())
+  data      Json?
+  request   Json?
+  user_ip   String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  Form      Form     @relation(fields: [formId], references: [id])
+  formId    String   @map("form_id")
+
+  @@map("submissions")
+}
