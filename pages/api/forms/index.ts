@@ -54,17 +54,13 @@ export async function POST(req: CreateFormRequest, res: NextApiResponse) {
   if (!user) {
     return res.status(403).json({ error: "Not authenticated" });
   }
-  const {
-    name,
-    emailForwardAddress,
-    botDetection = false,
-    notificationPreference,
-  } = req.body;
+  const { name, emailForwardAddress, botDetection, notificationPreference } =
+    req.body;
   const form = await prisma.form.create({
     data: {
       name,
       emailForwardAddress,
-      botDetection,
+      botDetection: !!botDetection,
       notificationPreference:
         notificationPreference.toUpperCase() as NotificationPreference,
       endpoint: nanoid(),

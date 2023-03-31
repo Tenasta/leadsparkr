@@ -1,7 +1,8 @@
+"use client";
+
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
 import Logo from "../Logo";
-import UserInfo from "../UserInfo";
 import { navigation } from "./navigation";
 import { NavItem } from "./types";
 import { classNames } from "../utils";
