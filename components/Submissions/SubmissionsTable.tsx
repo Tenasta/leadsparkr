@@ -1,7 +1,7 @@
-import { Submission } from "@prisma/client";
+import { Form, Submission } from "@prisma/client";
 
 type SubmissionsTableProps = {
-  data: Submission[];
+  data: (Submission & { form: Pick<Form, "endpoint" | "name"> })[];
   isLoading?: boolean;
 };
 
