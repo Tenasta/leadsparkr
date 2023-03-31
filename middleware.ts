@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import loadStytch from "./lib/loadStytch";
+import { authenticateStytchSession } from "./lib/authenticateStytchSession";
 
 const guestRoutes = ["/", "/login", "/signup"];
 
@@ -17,9 +17,6 @@ const openRoutes = [
 ];
 
 export async function middleware(req: NextRequest) {
-  //const { session } =
-
-  const res = NextResponse.next();
   const { pathname } = req.nextUrl;
 
   // Pass any guest routes straight through
@@ -31,30 +28,20 @@ export async function middleware(req: NextRequest) {
   if (openRoutes.some((regex) => new RegExp(regex).test(pathname))) {
     return NextResponse.next();
   }
-  console.log("Did not match any paths", pathname);
 
   // Redirect any other routes
-  const session = await authenticateStytchSession(req);
+  const session = await authenticateStytchSession(
+    req.cookies.get("stytch_session")?.value
+  );
 
   if (!session) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
-  return res;
+  req.headers.set("x-user-id", session.user.user_id);
+
+  return NextResponse.next({
+    request: {
+      headers: req.headers,
+    },
+  });
 }
-
-const authenticateStytchSession = async (req: NextRequest) => {
-  try {
-    const client = loadStytch();
-    const storedSession = req.cookies.get("stytch_session");
-    if (!storedSession) {
-      return false;
-    }
-
-    return await client.sessions.authenticate({
-      session_token: storedSession.value,
-    });
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
-};

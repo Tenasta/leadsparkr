@@ -7,7 +7,7 @@ import useSWR from "swr";
 
 const SubmissionsPage = () => {
   const { user, isInitialized, redirect } = useAuth();
-  const { data, error, isLoading } = useSWR("/api/submissions", fetcher);
+  const { data, error, isLoading } = useSWR("/submissions", fetcher);
 
   if (!isInitialized) return <p>Loading...</p>;
   if (!user) return <p>Not logged in.</p>;

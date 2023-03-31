@@ -12,7 +12,7 @@ export default function FormsPage() {
   const { user, isInitialized, redirect } = useAuth();
 
   const { data, error, isLoading } = useSWR<Form[], any, any>(
-    "/api/forms",
+    "/forms",
     fetcher
   );
 
