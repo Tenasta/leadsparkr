@@ -14,10 +14,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="container">
-          <div className="mx-auto max-w-lg">
-            <AppProvider>{children}</AppProvider>
-          </div>
+        <div className="mx-auto max-w-lg">
+          <AppProvider>{children}</AppProvider>
         </div>
       </body>
     </html>
