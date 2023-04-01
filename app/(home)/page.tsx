@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <div className="container">
+    <div className="container mx-auto max-w-lg">
       <div className="logo">
         <img src="/images/logo.svg" />
       </div>

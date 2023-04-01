@@ -1,7 +1,7 @@
 import { Form, Submission } from "@prisma/client";
 
 type SubmissionsTableProps = {
-  data: (Submission & { form: Pick<Form, "endpoint" | "name"> })[];
+  data: (Submission & { Form: Pick<Form, "endpoint" | "name"> })[];
   isLoading?: boolean;
 };
 
@@ -55,10 +55,10 @@ const SubmissionsTable = ({
             data.map((submission) => (
               <tr key={submission.id}>
                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                  {submission.form.name}
+                  {submission.Form.name}
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {submission.form.endpoint}
+                  {submission.Form.endpoint}
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                   {submission.createdAt.toString()}
