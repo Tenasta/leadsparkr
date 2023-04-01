@@ -19,10 +19,10 @@ export default function LoginPage() {
   const stytchClient = useStytch();
   const { session } = useStytchSession();
   const [error, setError] = useState<string>();
-  const [token, setToken] = useState<string | null>();
+  const [loggingIn, setLoggingIn] = useState<boolean>();
 
   useEffect(() => {
-    setToken(new URLSearchParams(window.location.search).get("token"));
+    const token = new URLSearchParams(window.location.search).get("token");
     if (session) {
       window.location.href = "/dashboard";
     } else if (token) {
@@ -35,7 +35,7 @@ export default function LoginPage() {
           setError(e.message);
         });
     }
-  }, [stytchClient, session, token]);
+  }, [stytchClient, session]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 -mt-24 sm:px-6 lg:px-8 mx-auto">
@@ -48,9 +48,9 @@ export default function LoginPage() {
         </div>
       )}
       <div className="text-white">
-        {token && !error && <h3 className="">Logging in...</h3>}
+        {loggingIn && !error && <h3 className="">Logging in...</h3>}
       </div>
-      {(!token || error) && <StytchLogin config={config} />}
+      {(!loggingIn || error) && <StytchLogin config={config} />}
     </div>
   );
 }
