@@ -7,6 +7,7 @@ export default async function handler(
 ) {
   const user = await withAuthSession(req);
   if (!user) {
+    console.log("Not authenticated");
     return res.status(403).json({ error: "Not authenticated" });
   }
   console.log(

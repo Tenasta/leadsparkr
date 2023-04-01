@@ -10,10 +10,15 @@ export default async function withAuthSession(
   const session = await authenticateStytchSession(
     req.cookies["stytch_session"]
   );
-  if (!session) return null;
-
+  if (!session) {
+    console.log("Error: No session found.");
+    return null;
+  }
   const email = session.user.emails.find((e) => e.verified)?.email;
-  if (!email) throw new Error("No verified email found");
+  if (!email) {
+    console.log("Error: No verified email found.");
+    throw new Error("No verified email found.");
+  }
 
   const userData = {
     email,
