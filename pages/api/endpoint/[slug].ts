@@ -1,6 +1,14 @@
 import prisma from "@/lib/prisma";
+import formidable from "formidable";
+import IncomingForm from "formidable/Formidable";
 import { NextApiRequest, NextApiResponse } from "next";
 import requestIp from "request-ip";
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
@@ -21,7 +29,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
     return res.status(404).json({ error: "Not found." });
   }
 
-  const submissionData = buildSubmissionData(req);
+  const submissionData = await buildSubmissionData(req);
 
   const submission = await prisma.submission.create({
     data: {
@@ -37,11 +45,21 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
   return res.json({ data: form });
 }
 
-function buildSubmissionData(req: NextApiRequest) {
+async function buildSubmissionData(req: NextApiRequest) {
   const detectedIp = requestIp.getClientIp(req) ?? "unknown";
 
+  const data: { fields: { [key: string]: any }; err: any } = await new Promise(
+    (resolve, reject) => {
+      const form: IncomingForm = formidable();
+
+      form.parse(req, (err, fields) => {
+        if (err) reject({ err });
+        resolve({ err, fields });
+      });
+    }
+  );
   return {
     user_ip: detectedIp,
-    data: req.body,
+    data: data?.fields ?? req.body,
   };
 }
