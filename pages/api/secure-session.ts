@@ -26,6 +26,8 @@ export default async function withAuthSession(req: NextApiRequest) {
     update: userData,
   });
 
+  console.log("Current user:", user);
+
   return {
     user,
   };
