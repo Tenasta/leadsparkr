@@ -12,12 +12,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <div className="mx-auto max-w-lg">
-          <AppProvider>{children}</AppProvider>
-        </div>
-      </body>
-    </html>
+    <div className="mx-auto max-w-lg">
+      <AppProvider>{children}</AppProvider>
+    </div>
   );
 }
