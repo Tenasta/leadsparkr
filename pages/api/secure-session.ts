@@ -6,7 +6,10 @@ import { NextApiRequest } from "next";
 export default async function withAuthSession(
   req: NextApiRequest
 ): Promise<{ user: User } | null> {
-  console.log("Checking auth session");
+  console.log(
+    "Checking auth session, cookie exists:",
+    !!req.cookies["stytch_session"]
+  );
   const session = await authenticateStytchSession(
     req.cookies["stytch_session"]
   );

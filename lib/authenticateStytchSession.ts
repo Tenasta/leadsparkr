@@ -6,6 +6,7 @@ export const authenticateStytchSession = async (sessionCookie?: string) => {
   }
   try {
     const client = loadStytch();
+    console.log("Loaded client");
 
     return await client.sessions.authenticate({
       session_token: sessionCookie,
