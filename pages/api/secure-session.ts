@@ -6,13 +6,9 @@ import { NextApiRequest } from "next";
 export default async function withAuthSession(
   req: NextApiRequest
 ): Promise<{ user: User } | null> {
-  console.log(
-    "Checking auth session, cookie exists:",
-    !!req.cookies["stytch_session"]
-  );
-  const session = await authenticateStytchSession(
-    req.cookies["stytch_session"]
-  );
+  const sessionToken =
+    req.cookies["stytch_session"] || (req.headers["x-session-token"] as string);
+  const session = await authenticateStytchSession(sessionToken ?? "");
   if (!session) {
     console.log("Error: No session found.");
     return null;
@@ -38,7 +34,7 @@ export default async function withAuthSession(
     update: userData,
   });
 
-  console.log("Current user:", user);
+  // console.log("Current user:", user);
 
   return { user };
 }

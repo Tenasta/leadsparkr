@@ -7,6 +7,7 @@ import {
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Form, Submission } from "@prisma/client";
+import { cookies } from "next/headers";
 import Link from "next/link";
 
 export default async function ViewFormPage({
@@ -14,12 +15,18 @@ export default async function ViewFormPage({
 }: {
   params: { id: string };
 }) {
-  const form: Form = await fetcher(`/forms/${params.id}`).catch((err) =>
-    console.error(err)
+  const apiConfig = {
+    headers: {
+      "x-session-token": cookies().get("stytch_session")?.value || "",
+    },
+  };
+  const form: Form = await fetcher(`/forms/${params.id}`, apiConfig).catch(
+    (err) => console.error("error fetching")
   );
   const submissions: Submission[] = await fetcher(
-    `/submissions?formId=${params.id}`
-  ).catch((err) => console.error(err));
+    `/submissions?formId=${params.id}`,
+    apiConfig
+  ).catch((err) => console.error("error fetching"));
   if (!form) return <p>Form not found.</p>;
   const error = "";
   return (
