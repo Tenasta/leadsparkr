@@ -35,7 +35,7 @@ export default function LoginPage() {
           setError(e.message);
         });
     }
-  }, [stytchClient, session]);
+  }, [stytchClient, session, token]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 -mt-24 sm:px-6 lg:px-8 mx-auto">
