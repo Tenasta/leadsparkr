@@ -1,12 +1,15 @@
 import { authenticateStytchSession } from "@/lib/authenticateStytchSession";
 import prisma from "@/lib/prisma";
+import { User } from "@prisma/client";
 import { NextApiRequest } from "next";
 
-export default async function withAuthSession(req: NextApiRequest) {
+export default async function withAuthSession(
+  req: NextApiRequest
+): Promise<{ user: User } | null> {
   const session = await authenticateStytchSession(
     req.cookies["stytch_session"]
   );
-  if (!session) return false;
+  if (!session) return null;
 
   const email = session.user.emails.find((e) => e.verified)?.email;
   if (!email) throw new Error("No verified email found");
@@ -28,7 +31,5 @@ export default async function withAuthSession(req: NextApiRequest) {
 
   console.log("Current user:", user);
 
-  return {
-    user,
-  };
+  return { user };
 }

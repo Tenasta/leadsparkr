@@ -9,6 +9,7 @@ export default async function handler(
   if (!user) {
     return res.status(403).json({ error: "Not authenticated" });
   }
+  console.log("Looking for form with id:", req.query.id, "for user:", user.id);
 
   const data = await prisma.form.findFirst({
     where: {
