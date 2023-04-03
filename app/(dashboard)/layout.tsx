@@ -15,8 +15,6 @@ export default async function DashboardLayout({
           <SidebarLayout>{children}</SidebarLayout>
         </AppProvider>
       </div>
-
-      <div id="modal-root"></div>
     </>
   );
 }
