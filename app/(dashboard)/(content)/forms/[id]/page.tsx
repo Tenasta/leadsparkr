@@ -1,4 +1,5 @@
 import Button from "@/components/Button";
+import FormEndpointOutput from "@/components/FormEndpointOutput";
 import FormSubmissionsTable from "@/components/Submissions/FormSubmissionsTable";
 import { fetcher } from "@/lib/api";
 import {
@@ -96,7 +97,7 @@ export default async function ViewFormPage({
               <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">Endpoint</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {form.endpoint}
+                  <FormEndpointOutput form={form} />
                 </dd>
               </div>
             </dl>
