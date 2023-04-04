@@ -2,7 +2,7 @@ import "./globals.css";
 import "./home.css";
 
 export const metadata = {
-  title: "Leadsaprkr",
+  title: "Leadsparkr",
   description: "Leadsparkr - Connect with your customers",
 };
 
