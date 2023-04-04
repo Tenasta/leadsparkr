@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import FormEndpointOutput from "@/components/FormEndpointOutput";
-import FormSubmissionsTable from "@/components/Submissions/FormSubmissionsTable";
+import RealtimeSubmissions from "@/components/Submissions/RealtimeSubmissions";
 import { fetcher } from "@/lib/api";
 import {
   ArrowLeftIcon,
@@ -109,7 +109,8 @@ export default async function ViewFormPage({
           <div className="pt-8">
             {submissions && error}
             {submissions && (
-              <FormSubmissionsTable data={submissions}></FormSubmissionsTable>
+              <RealtimeSubmissions data={submissions} />
+              // <FormSubmissionsTable data={submissions}></FormSubmissionsTable>
             )}
           </div>
         </div>

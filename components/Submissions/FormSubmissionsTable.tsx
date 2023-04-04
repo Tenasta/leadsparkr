@@ -1,13 +1,13 @@
 import { Submission } from "@prisma/client";
 import SubmissionData from "./SubmissionData";
-
+export type FormSubmissionsTableProps = {
+  data: Submission[];
+  isLoading?: boolean;
+};
 const FormSubmissionsTable = ({
   data,
   isLoading = false,
-}: {
-  data: Submission[];
-  isLoading?: boolean;
-}) => {
+}: FormSubmissionsTableProps) => {
   return (
     <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
       <table

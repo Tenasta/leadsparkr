@@ -14,9 +14,7 @@ export default function FormEndpointOutput({ form }: { form: Form }) {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => setIsOpen(true);
   const formEndpoint = `${process.env.NEXT_PUBLIC_FORM_ENDPOINT}/${form.endpoint}`;
-  const exampleCurlPost = `curl -X POST ${formEndpoint}
-  -H "Content-Type: application/x-www-form-urlencoded" -d
-  "exampleField1=value1&exampleField2=value2`;
+  const exampleCurlPost = `curl -X POST ${formEndpoint} -H "Content-Type: application/x-www-form-urlencoded" -d "exampleField1=value1&exampleField2=value2"`;
   useEffect(() => {
     if (copied) {
       setTimeout(() => {
@@ -59,19 +57,19 @@ export default function FormEndpointOutput({ form }: { form: Form }) {
           </button>
         </DialogTrigger>
         <DialogContent>
-          <div className="flex flex-col">
+          <div className="flex flex-col px-4">
             <h2 className="text-lg font-bold text-white mb-4">Example</h2>
             <p className="text-white mb-4">
               Copy the code below to your terminal and see it appear in the
               submissions table.
             </p>
-            <div className="max-w-[75%] ">
+            <div className="">
               <CopyToClipboard
                 text={exampleCurlPost}
                 onCopy={() => setCopied(true)}
               >
                 <div
-                  className="cursor-pointer relative bg-blue-100 rounded-md p-3 "
+                  className="cursor-pointer relative bg-blue-100 rounded-md p-3 max-w-2xl"
                   title="Click to copy"
                 >
                   <div className="absolute -right-7">
@@ -88,7 +86,9 @@ export default function FormEndpointOutput({ form }: { form: Form }) {
                       />
                     )}
                   </div>
-                  <pre className="overflow-x-scroll">{exampleCurlPost}</pre>
+                  <pre className="break-words whitespace-pre-wrap">
+                    {exampleCurlPost}
+                  </pre>
                 </div>
               </CopyToClipboard>
             </div>
