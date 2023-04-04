@@ -101,7 +101,7 @@ const NewFormPage = () => {
                 <div className="space-y-6 sm:space-y-5">
                   <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <label
-                      htmlFor="form-name"
+                      htmlFor="name"
                       className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                     >
                       Form name{" "}
@@ -115,7 +115,7 @@ const NewFormPage = () => {
                         name="name"
                         type="text"
                         className={
-                          "max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" +
+                          "p-2 border max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" +
                           (errors.name && touched.name
                             ? " bg-red-100 border-red-400"
                             : "")
@@ -126,7 +126,7 @@ const NewFormPage = () => {
 
                   <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <label
-                      htmlFor="form-name"
+                      htmlFor="email_forward_address"
                       className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                     >
                       Email forward address{" "}
@@ -143,7 +143,7 @@ const NewFormPage = () => {
                         name="emailForwardAddress"
                         type="email"
                         className={
-                          "max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" +
+                          "p-2 border max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" +
                           (errors.emailForwardAddress &&
                           touched.emailForwardAddress
                             ? " bg-red-100 border-red-400"
@@ -155,7 +155,7 @@ const NewFormPage = () => {
 
                   <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <label
-                      htmlFor="form-name"
+                      htmlFor="bot_detection"
                       className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                     >
                       Enable bot detection
@@ -163,16 +163,16 @@ const NewFormPage = () => {
                     <div className="mt-2 flex items-center h-5 sm:col-span-2">
                       <Field
                         id="bot_detection"
-                        name="bot_detection"
+                        name="botDetection"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded "
+                        className="p-2 border focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded "
                       />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+              <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
                 <div>
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
                     Notifications
@@ -205,7 +205,7 @@ const NewFormPage = () => {
                                   id="frequency-immediately"
                                   type="radio"
                                   name="notificationPreference"
-                                  value="immediately"
+                                  value="ALL"
                                   className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                                 />
                                 <label
@@ -221,7 +221,7 @@ const NewFormPage = () => {
                                   id="frequency-daily"
                                   type="radio"
                                   name="notificationPreference"
-                                  value="daily"
+                                  value="DAILY"
                                   className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                                 />
                                 <label
@@ -237,7 +237,7 @@ const NewFormPage = () => {
                                   id="frequency-weekly"
                                   type="radio"
                                   name="notificationPreference"
-                                  value="weekly"
+                                  value="WEEKLY"
                                   className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                                 />
                                 <label

@@ -24,6 +24,9 @@ async function GET(req: NextApiRequest, res: NextApiResponse) {
         },
       },
       id: req.query.id as string,
+      ...(typeof req.query.formId === "string"
+        ? { formId: req.query.formId }
+        : {}),
     },
     include: {
       Form: {
