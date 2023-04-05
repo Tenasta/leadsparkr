@@ -21,6 +21,8 @@ export default async function ViewFormPage({
       "x-session-token": cookies().get("stytch_session")?.value || "",
     },
   };
+  // todo since this is a server component we can interact with the database directly
+  // this will reduce the amount of internal function invocations
   const form: Form = await fetcher(`/forms/${params.id}`, apiConfig).catch(
     (err) => console.error("error fetching")
   );
